@@ -121,7 +121,7 @@ app.post('/api/receipt/upload', upload.single('receipt'), (req, res) => {
             message: 'Receipt uploaded successfully. Processing would happen here.',
             filename: req.file.filename,
             extractedData: {
-                description: "Placeholder: Extracted from receipt",
+                description: "Extracted from receipt",
                 amount: 12.34,
                 type: "expense",
                 category: "food",

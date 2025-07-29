@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { format, startOfMonth, endOfMonth } from 'date-fns';
 import { ArrowUpCircle, ArrowDownCircle, Trash2, TrendingUp, TrendingDown, DollarSign, UploadCloud } from 'lucide-react';
+const API_URL = 'http://localhost:5001/api';
 
 const TransactionForm = ({ onTransactionAdded }) => {
     const [description, setDescription] = useState('');
@@ -27,8 +28,15 @@ const TransactionForm = ({ onTransactionAdded }) => {
                 date
             });
             onTransactionAdded();
-            setDescription(''); setAmount(''); setCategory('food'); setError(''); setDate(format(new Date(), 'yyyy-MM-dd'));
+            setDescription(''); 
+            setAmount(''); 
+            setCategory('food'); 
+            setError(''); 
+            setDate(format(new Date(), 'yyyy-MM-dd'));
         } catch (err) {
+            // THIS IS THE NEW, IMPORTANT LINE
+            console.error("Error details:", err); 
+            
             setError('Failed to add transaction.');
         }
     };
@@ -38,7 +46,6 @@ const TransactionForm = ({ onTransactionAdded }) => {
             <h2 className="text-2xl font-bold mb-4 text-slate-900">Add Transaction</h2>
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
-                {/* ... form fields ... */}
                 <div className="flex space-x-2">
                     <button type="button" onClick={() => setTransactionType('expense')} className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all ${transactionType === 'expense' ? 'bg-red-500 text-white shadow-sm' : 'bg-slate-100 hover:bg-slate-200'}`}>Expense</button>
                     <button type="button" onClick={() => setTransactionType('income')} className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all ${transactionType === 'income' ? 'bg-green-500 text-white shadow-sm' : 'bg-slate-100 hover:bg-slate-200'}`}>Income</button>

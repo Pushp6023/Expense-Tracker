@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+// src/components/ReceiptUpload/ReceiptUpload.jsx
+
+import React, { useState } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { format, startOfMonth, endOfMonth } from 'date-fns';
-import { ArrowUpCircle, ArrowDownCircle, Trash2, TrendingUp, TrendingDown, DollarSign, UploadCloud } from 'lucide-react';
+import { UploadCloud } from 'lucide-react';
+
+const API_URL = 'http://localhost:5001/api';
 
 const ReceiptUpload = ({ onTransactionAdded }) => {
     const [file, setFile] = useState(null);
@@ -21,18 +23,35 @@ const ReceiptUpload = ({ onTransactionAdded }) => {
         }
         const formData = new FormData();
         formData.append('receipt', file);
+
         try {
-            setStatus('Uploading...');
-            const response = await axios.post(`${API_URL}/receipt/upload`, formData, {
+            setStatus('1/2: Uploading receipt...');
+            // Step 1: Upload the file and get the placeholder data
+            const uploadResponse = await axios.post(`${API_URL}/receipt/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            setStatus(response.data.message);
-            // In a real app, you would use response.data.extractedData to create a new transaction
-            console.log("Extracted Data (Placeholder):", response.data.extractedData);
-            onTransactionAdded(); // Refresh list after "processing"
-            setFile(null);
+
+            const { extractedData } = uploadResponse.data;
+            
+            setStatus('2/2: Adding transaction...');
+            // Step 2: Use the extracted data to create a new transaction
+            await axios.post(`${API_URL}/transactions`, {
+                description: extractedData.description,
+                amount: extractedData.amount,
+                type: extractedData.type,
+                category: extractedData.category,
+                date: extractedData.date
+            });
+
+            setStatus('Upload and processing successful!');
+            
+            // Step 3: Refresh the transaction list to show the new item
+            onTransactionAdded(); 
+            setFile(null); // Clear the file input
+
         } catch (err) {
-            setStatus('Upload failed.');
+            console.error("Receipt processing failed:", err);
+            setStatus('Upload failed. See console for details.');
         }
     };
 

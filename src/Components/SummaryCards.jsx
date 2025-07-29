@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { format, startOfMonth, endOfMonth } from 'date-fns';
 import { ArrowUpCircle, ArrowDownCircle, Trash2, TrendingUp, TrendingDown, DollarSign, UploadCloud } from 'lucide-react';
+const API_URL = 'http://localhost:5001/api';
 
 const SummaryCards = ({ totalIncome, totalExpenses, balance }) => (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
