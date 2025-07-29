@@ -30,4 +30,4 @@ The project is organized into two main directories, separating the frontend and 
 ```
 
 * **`src` folder:** This directory holds the entire frontend application code, built with React. It includes all components, state management, and styling necessary to render the user interface.
-* **`api` folder:** This directory contains the backend logic. Each file in this folder typically corresponds to a serverless function that handles a specific API endpoint (e.g., `api/add-expense.js`, `api/get-expenses.js`). Vercel automatically deploys these files as individual serverless functions.
+* **`api` folder:** This directory contains the backend logic. File typically corresponds to a serverless function that handles a specific API endpoint. Vercel automatically deploys these files as individual serverless functions.
