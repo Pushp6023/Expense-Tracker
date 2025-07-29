@@ -6,18 +6,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 
-// --- Basic Setup ---
-// ES Modules don't have __dirname, so we need to create it
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// --- Middleware ---
 app.use(cors());
 app.use(express.json());
-// Serve static files from the 'uploads' directory
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -30,14 +27,11 @@ mongoose.connect(MONGO_URI, {
     process.exit(1);
 });
 
-// --- Multer Setup for File Uploads ---
-// This configures where to store uploaded files.
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/') // 'uploads' is the folder where files will be saved
+    cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    // Create a unique filename to avoid overwrites
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
 });
@@ -47,7 +41,7 @@ const upload = multer({ storage: storage });
 const transactionSchema = new mongoose.Schema({
     description: { type: String, required: true, trim: true },
     amount: { type: Number, required: true },
-    type: { type: String, required: true }, // 'income' or 'expense'
+    type: { type: String, required: true },
     category: { type: String, required: true },
     date: { type: Date, default: Date.now }
 });
@@ -60,7 +54,7 @@ app.get('/api/transactions', async (req, res) => {
         
         const query = {};
         if (startDate && endDate) {
-            // Ensure the end date includes the entire day
+
             const endOfDay = new Date(endDate);
             endOfDay.setHours(23, 59, 59, 999);
 
@@ -136,8 +130,6 @@ app.post('/api/receipt/upload', upload.single('receipt'), (req, res) => {
     }
 });
 
-
-// --- Start the Server ---
 app.listen(PORT, () => {
     console.log(`Backend server is running on http://localhost:${PORT}`);
 });

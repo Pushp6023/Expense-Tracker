@@ -34,7 +34,6 @@ const TransactionForm = ({ onTransactionAdded }) => {
             setError(''); 
             setDate(format(new Date(), 'yyyy-MM-dd'));
         } catch (err) {
-            // THIS IS THE NEW, IMPORTANT LINE
             console.error("Error details:", err); 
             
             setError('Failed to add transaction.');
