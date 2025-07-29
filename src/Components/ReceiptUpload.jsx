@@ -1,10 +1,8 @@
-// src/components/ReceiptUpload/ReceiptUpload.jsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { UploadCloud } from 'lucide-react';
 
-const API_URL = 'http://localhost:5001/api';
+const API_URL = '/api';
 
 const ReceiptUpload = ({ onTransactionAdded }) => {
     const [file, setFile] = useState(null);

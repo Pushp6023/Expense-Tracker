@@ -9,7 +9,7 @@ import ReceiptUpload from './Components/ReceiptUpload';
 import TransactionList from './Components/TransactionList';
 import ExpenseChart from './Components/ExpenseChart';
 
-const API_URL = 'http://localhost:5001/api';
+const API_URL = '/api';
 
 export default function App() {
     const [transactions, setTransactions] = useState([]);
