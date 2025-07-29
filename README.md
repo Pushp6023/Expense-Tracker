@@ -8,6 +8,10 @@ A simple web application to help you log and monitor your daily spending.
 
 You can view the live project here: **[https://expense-tracker-alpha-six-36.vercel.app/](https://expense-tracker-alpha-six-36.vercel.app/)**
 
+## Demo Video
+
+[Watch the project demo on Google Drive](https://drive.google.com/file/d/1RkpX-NjLrLy6eBIa41AVAA6tLU9NQxTq/view?usp=sharing)
+
 ***
 
 ## Tech Stack
