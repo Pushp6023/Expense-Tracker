@@ -1,18 +1,18 @@
-# Project Title
+# Expense Tracker
 
-A brief description of your project, what it does, and why it's useful.
+A simple web application to help you log and monitor your daily spending.
 
-## 🚀 Features
+***
 
-- Feature 1
-- Feature 2
-- Feature 3
+## ## Live Demo
 
-## 📦 Installation
+You can view the live project here: **[https://expense-tracker-alpha-six-36.vercel.app/](https://expense-tracker-alpha-six-36.vercel.app/)**
 
-Clone the repo and install dependencies:
+***
 
-```bash
-git clone https://github.com/yourusername/repo-name.git
-cd repo-name
-npm install
+## ## Tech Stack
+
+* **Frontend:** **React** was used to build the interactive and fast user interface.
+* **Backend & Hosting:** **Vercel** hosts the application and runs backend logic using serverless functions.
+* **Database:** A cloud database is used to permanently store all expense entries.
+* **Version Control:** **GitHub** was used to manage the source code.
