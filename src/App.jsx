@@ -25,6 +25,7 @@ export default function App() {
             const response = await axios.get(`${API_URL}/transactions`, {
                 params: { startDate, endDate }
             });
+            console.log("Data received from backend:", response.data); 
             const formattedData = response.data.map(t => ({ ...t, id: t._id }));
             setTransactions(formattedData);
             setError('');
